@@ -1,0 +1,37 @@
+require(ElemStatLearn)
+data(zip.train)
+X0<-zip.train[zip.train[,1]==0,]
+X1<-zip.train[zip.train[,1]==1,]
+X01<-rbind(X0,X1)
+X0a<-X0[1:100,]
+X1a<-X1[1:100,]
+X01a<-rbind(X0a,X1a)
+X0b<-X0[sample(nrow(X0),100),]
+X1b<-X1[sample(nrow(X1),100),]
+X01b<-rbind(X0b,X1b)
+X<-X01b[,2:257]
+y<-X01b[,1]
+
+################### Vectors de prova
+## Format del train, matriu[1:7921,1:257] cada fila te 257 elements, index 1 es un numero del 0 al 9, index 2:257 valors dels 16x16 pixels
+## Recordar: R el primer index d'una matriu es 1 (no 0)!
+data(zip.test)
+X0.test<-zip.test[zip.test[,1]==0,] #Agafa totes les files que representen el 0
+X1.test<-zip.test[zip.test[,1]==1,]
+X01.test<-rbind(X0.test,X1.test)
+X.test<-X01.test[,2:257]
+y.test<-X01.test[,1]
+fila<-sample(nrow(X.test),1)
+x<-X.test[fila,]
+y.check<-y.test[fila]
+
+
+##############################################
+data(prostate)
+prostate.train<-prostate[prostate$train==TRUE,-10]
+prostate.test<-prostate[prostate$train==FALSE,-10]
+X<-prostate.train[,1:8]
+y<-prostate.train[,9]
+fila<-sample(nrow(prostate.test),1)
+x<-prostate.test[fila,-9]
+y.check<-prostate.test[fila,9]
